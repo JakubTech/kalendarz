@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Kalendarz adwentowy</title>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Rubik+Bubbles&display=swap');
+    body {
+      font-family: "Rubik Bubbles",'Arial', sans-serif;
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-around;
+      padding: 20px;
+      background-color: black;
+    }
+
+    .calendar-title {
+      font-size: 24px;
+      font-weight: bold;
+      margin-bottom: 20px;
+      color: black;
+    }
+
+    .calendar-wrapper {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      max-width: 800px;
+      background-image: url('tapeta.jpg');
+      background-size: cover;
+      background-repeat: no-repeat;
+      background-attachment: fixed;
+      padding: 20px;
+      border-radius: 20px;
+    }
+
+    .door-container {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-around;
+      max-width: 800px;
+      background-image: url('obrazek.jpeg');
+      background-size: cover;
+      background-repeat: no-repeat;
+      background-attachment: fixed;
+      padding: 20px;
+      border: 2px #630000 solid;
+      border-radius: 20px;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.8);
+    }
+
+    .door {
+      width: 100px;
+      height: 100px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background-image: url(obraz.jpeg);
+      background-size: contain;
+      margin: 10px;
+      cursor: pointer;
+      font-size: 36px;
+      font-weight: bold;
+      border-radius: 10px;
+      transition: transform 0.5s;
+      box-shadow: 5px 0 10px rgba(0, 0, 0, 0.8); 
+    }
+
+    .door:hover {
+      transform: scale(1.1);
+    }
+
+    .door img {
+      max-width: 100%;
+      max-height: 100%;
+      border-radius: 10px;
+    }
+
+    .opened {
+      animation: openDoorAnimation 1s ease-in-out;
+    }
+
+    @keyframes openDoorAnimation {
+      from {
+        transform: rotateY(0deg);
+      }
+      to {
+        transform: rotateY(180deg);
+      }
+    }
+
+    .opened img {
+      animation: fadeIn 0.5s ease-in-out;
+    }
+
+    @keyframes fadeIn {
+      from {
+        opacity: 0;
+      }
+      to {
+        opacity: 1;
+      }
+    }
+
+    @media (max-width: 600px) {
+      .door {
+        width: calc(33.333% - 20px); /* Szerokość okienka */
+      }
+    }
+
+    @media (min-width: 601px) {
+      .door {
+        width: calc(16.666% - 20px); /* Szerokość okienka */
+      }
+      #restartButton {
+        margin-left: 25px;
+      }
+      .calendar-wrapper {
+        margin-top: 60px;
+      }
+    }
+
+    #restartButton {
+        padding: 5px 10px;
+        font-size: 20px;
+        font-weight: bold;
+        background-image: url(obrazek.jpeg);
+        border: none;
+        border-radius: 10px;
+        color: white;
+    }
+  </style>
+</head>
+<body>
+
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+      const calendarDoors = document.querySelectorAll('.door');
+      
+      calendarDoors.forEach((door, index) => {
+        door.addEventListener('click', () => openDoor(index + 1));
+      });
+
+      function openDoor(day) {
+        const imageUrl = `day${day}.jpg`; // Ścieżka do odpowiednich obrazków
+
+        if (calendarDoors[day - 1].classList.contains('opened')) {
+          alert("Już zjadłeś tę czekoladkę, człowieku!");
+        }
+          else {
+          calendarDoors[day - 1].classList.add('opened');
+          setTimeout(() => {
+            calendarDoors[day - 1].innerHTML = `<img src="${imageUrl}" alt="Day ${day}" width="100%" height="100%">`;
+            calendarDoors[day - 1].style.fontSize = "20px";
+          }, 1000);
+        }
+        }
+    }
+);
+function restartPage() {
+      location.reload();
+    }
+</script>
+
+<div class="calendar-wrapper">
+    <div class="calendar-title" style="font-size: 28px;">Kalendarz adwentowy
+    <button id="restartButton" onclick="restartPage()">RESTART</button>
+</div>
+<div class="door-container">
+    <div class="door">1</div>
+    <div class="door">2</div>
+    <div class="door">3</div>
+    <div class="door">4</div>
+    <div class="door">5</div>
+    <div class="door">6</div>
+    <div class="door">7</div>
+    <div class="door">8</div>
+    <div class="door">9</div>
+    <div class="door">10</div>
+    <div class="door">11</div>
+    <div class="door">12</div>
+    <div class="door">13</div>
+    <div class="door">14</div>
+    <div class="door">15</div>
+    <div class="door">16</div>
+    <div class="door">17</div>
+    <div class="door">18</div>
+    <div class="door">19</div>
+    <div class="door">20</div>
+    <div class="door">21</div>
+    <div class="door">22</div>
+    <div class="door">23</div>
+    <div class="door">24</div>
+</div>
+</div>
+</body>
+</html>
